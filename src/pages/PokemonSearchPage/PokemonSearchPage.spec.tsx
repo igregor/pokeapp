@@ -1,0 +1,26 @@
+import {} from "./PokemonSearchPage";
+
+describe("SinglePokemonPage", () => {
+  it.todo("shows introduction message before the user types anything");
+
+  it.todo("renders SearchBar");
+
+  describe("search", () => {
+    it.todo("allows to search pokemons by name");
+
+    it.todo("allows to filter the results by type");
+
+    it.todo("allows to clear the search results");
+  });
+
+  describe("show more button", () => {
+    // TODO @g.wojtanowicz - this should be done as an optimization for the long lists
+    // but maybe it's outside of the scope of this task
+    it.todo("is rendered when there are more than XX results");
+    it.todo("shows more results after click");
+  });
+
+  it.todo("opens the details dialog when the user clicks the list item");
+
+  it.todo("closes the details dialog when the user clicks 'X'");
+});
