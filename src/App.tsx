@@ -1,5 +1,16 @@
+import { Navigate, Route, Routes } from "react-router-dom";
+
+import PokemonSearchPage from "./pages/PokemonSearchPage";
+
 function App() {
-  return <div className="App">Pokeapp</div>;
+  return (
+    <div>
+      <Routes>
+        <Route path="/" element={<PokemonSearchPage />} />
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
+    </div>
+  );
 }
 
 export default App;
