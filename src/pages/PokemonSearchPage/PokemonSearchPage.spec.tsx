@@ -1,9 +1,36 @@
-import {} from "./PokemonSearchPage";
+import PokemonSearchPage from "./PokemonSearchPage";
+import { render, screen } from "./../../test-utils/render";
+
+const renderPokemonSearchPage = () => {
+  render(<PokemonSearchPage />);
+
+  const pageObject = {
+    assert: {
+      introductionMessage: {
+        isRendered: () => screen.getByText("Let's find a pokemon"),
+      },
+
+      searchBar: {
+        isRendered: () => screen.getByPlaceholderText("filter by name"),
+      },
+    },
+  };
+
+  return pageObject;
+};
 
 describe("SinglePokemonPage", () => {
-  it.todo("shows introduction message before the user types anything");
+  it("renders introduction message before the user types anything", () => {
+    const utils = renderPokemonSearchPage();
 
-  it.todo("renders SearchBar");
+    utils.assert.introductionMessage.isRendered();
+  });
+
+  it("renders search bar", () => {
+    const utils = renderPokemonSearchPage();
+
+    utils.assert.searchBar.isRendered();
+  });
 
   describe("search", () => {
     it.todo("allows to search pokemons by name");
