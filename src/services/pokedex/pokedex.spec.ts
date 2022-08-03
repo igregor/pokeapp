@@ -75,7 +75,7 @@ Object {
 });
 
 describe("listPokemon()", () => {
-  it("returns an empty array when there are no pokemons matching by name", () => {
+  it("returns an empty array when there are no pokemon matched by name", () => {
     const Pokedex = new PokedexClient();
 
     const results = Pokedex.listPokemon({ name: "gregorozaur" });
@@ -83,7 +83,7 @@ describe("listPokemon()", () => {
     expect(results).toHaveLength(0);
   });
 
-  it("returns an empty array when there are no pokemons matching by type", () => {
+  it("returns an empty array when there are no pokemon matched by type", () => {
     const Pokedex = new PokedexClient();
 
     const results = Pokedex.listPokemon({ type: "Ground" });
@@ -91,7 +91,7 @@ describe("listPokemon()", () => {
     expect(results).toHaveLength(0);
   });
 
-  it("returns an empty array when there are pokemons misamatching name and type", () => {
+  it("returns an empty array when there are no pokemon matching name and type", () => {
     const Pokedex = new PokedexClient();
 
     const results = Pokedex.listPokemon({ name: "charizard", type: "Ground" });
@@ -99,7 +99,7 @@ describe("listPokemon()", () => {
     expect(results).toHaveLength(0);
   });
 
-  it("returns an array of pokemons matching by name and type", () => {
+  it("returns an array of pokemons matched by name and type", () => {
     const Pokedex = new PokedexClient();
 
     const results = Pokedex.listPokemon({ name: "chariz", type: "Fire" });
@@ -108,7 +108,7 @@ describe("listPokemon()", () => {
     expect(results[0].name.english).toBe("Charizard");
   });
 
-  it("returns an array of pokemons matching by name", () => {
+  it("returns an array of pokemons matched by name", () => {
     const Pokedex = new PokedexClient();
 
     const results = Pokedex.listPokemon({ name: "saur" });
@@ -118,7 +118,7 @@ describe("listPokemon()", () => {
     expect(results[1].name.english).toBe("Ivysaur");
   });
 
-  it("returns an array of pokemons matching by type", () => {
+  it("returns an array of pokemons matched by type", () => {
     const Pokedex = new PokedexClient();
 
     const results = Pokedex.listPokemon({ type: "Grass" });

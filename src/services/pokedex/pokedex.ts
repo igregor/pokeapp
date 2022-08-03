@@ -34,7 +34,7 @@ export class PokedexClient {
   }
 
   /**
-   * Returns a list of pokemon filtered type
+   * Returns a list of pokemon filtered by type
    */
   private queryByType(type: string): Pokemon[] {
     const results: Pokemon[] = [];

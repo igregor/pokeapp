@@ -5,6 +5,13 @@ import { render } from "@testing-library/react";
 import { BrowserRouter } from "react-router-dom";
 import userEvent from "@testing-library/user-event";
 
+const customRender = (ui: React.ReactElement) => {
+  return {
+    user: userEvent.setup(), // NOTE @g.wojtanowicz read more: https://testing-library.com/docs/user-event/setup/
+    ...render(ui),
+  };
+};
+
 // NOTE @g.wojtanowicz read more: https://testing-library.com/docs/example-react-router/#reducing-boilerplate
 const renderWithRouter = (ui: React.ReactElement, { route = "/" } = {}) => {
   window.history.pushState({}, "Test page", route);
@@ -17,4 +24,4 @@ const renderWithRouter = (ui: React.ReactElement, { route = "/" } = {}) => {
 
 // re-export everything
 export * from "@testing-library/react";
-export { renderWithRouter };
+export { renderWithRouter, customRender as render };

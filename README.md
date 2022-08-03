@@ -11,6 +11,12 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 - See the previous search results when navigating back to the search page from the pokemon
   details page
 
+## Known issues
+
+- optimized view for a long list of results - e.g. lazy loading or show more
+- error handling
+- real API
+
 ## Available Scripts
 
 In the project directory, you can run:

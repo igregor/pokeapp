@@ -7,7 +7,7 @@
       "chinese": "妙蛙种子",
       "french": "Bulbizarre"
     },
-    "type": ["Grass", "Poison"],
+    "type": ["Grass"],
     "base": {
       "HP": 45,
       "Attack": 49,
