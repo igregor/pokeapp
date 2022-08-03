@@ -8,7 +8,7 @@ export function renderPokemonSearchPage() {
     act: {
       searchBar: {
         typeInNameInput: async (text: string) => {
-          const input = screen.getByPlaceholderText("filter by name");
+          const input = screen.getByPlaceholderText("Filter by name");
 
           if (text) {
             await user.type(input, text);
@@ -63,7 +63,7 @@ export function renderPokemonSearchPage() {
       searchBar: {
         isRendered: () => {
           expect(
-            screen.getByPlaceholderText("filter by name")
+            screen.getByPlaceholderText("Filter by name")
           ).toBeInTheDocument();
         },
       },

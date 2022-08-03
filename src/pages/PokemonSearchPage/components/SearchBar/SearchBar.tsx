@@ -1,12 +1,15 @@
+import { ChangeEvent, useState } from "react";
 import {
   FormControl,
   InputLabel,
   MenuItem,
   Select,
   SelectChangeEvent,
+  Stack,
   TextField,
 } from "@mui/material";
-import { ChangeEvent } from "react";
+
+const defaultTypeValue = "default-value";
 
 interface SearchBarProps {
   onTypeSelect: (type: string) => void;
@@ -19,9 +22,17 @@ const SearchBar: React.FC<SearchBarProps> = ({
   onNameQueryChange,
   onTypeSelect,
 }) => {
+  const [type, setType] = useState(defaultTypeValue);
+
+  const isTypeSelectDisabled = availableTypes.length === 0;
+
   const handleTypeChange = (event: SelectChangeEvent<string>): void => {
-    onTypeSelect(event.target.value);
+    const value = event.target.value;
+
+    onTypeSelect(value);
+    setType(value);
   };
+
   const handleNameQueryChange = (
     event: ChangeEvent<HTMLInputElement>
   ): void => {
@@ -29,23 +40,26 @@ const SearchBar: React.FC<SearchBarProps> = ({
   };
 
   return (
-    <div>
+    <Stack direction={{ xs: "column", md: "row" }} spacing={2}>
       <TextField
-        placeholder="filter by name"
+        placeholder="Filter by name"
         variant="outlined"
         onChange={handleNameQueryChange}
+        fullWidth={true}
       />
 
       <FormControl fullWidth>
-        <InputLabel id="demo-simple-select-label">Age</InputLabel>
+        <InputLabel id="type-select-label">Type</InputLabel>
         <Select
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          value={"default"}
+          labelId="type-select-label"
+          id="type-select"
+          value={type}
           label="Name"
           onChange={handleTypeChange}
+          fullWidth={true}
+          disabled={isTypeSelectDisabled}
         >
-          <MenuItem disabled value="default">
+          <MenuItem disabled value={defaultTypeValue}>
             <em>Select type</em>
           </MenuItem>
           {availableTypes.map((type) => (
@@ -55,7 +69,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
           ))}
         </Select>
       </FormControl>
-    </div>
+    </Stack>
   );
 };
 

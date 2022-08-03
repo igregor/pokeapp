@@ -1,7 +1,8 @@
-import PokemonListItem from "./PokemonListItem";
-
-import Status from "../Status";
 import { useState } from "react";
+import { List } from "@mui/material";
+
+import PokemonListItem from "./PokemonListItem";
+import Status from "../Status";
 import DetailsDialog from "../DetailsDialog";
 
 import { Pokemon } from "../../../../services/pokedex";
@@ -29,16 +30,17 @@ const PokemonList: React.FC<PokemonListProps> = ({ list }) => {
 
   return list.length ? (
     <>
-      <div data-testid="pokemon-list">
+      <List data-testid="pokemon-list">
         {list.map((pokemon) => (
           <PokemonListItem
             onItemClick={handleItemClick}
             key={pokemon.id}
             name={pokemon.name.english}
+            types={pokemon.type}
             thumbnail={pokemon.image.thumbnail}
           />
         ))}
-      </div>
+      </List>
 
       {selectedPokemonName && (
         <DetailsDialog
@@ -48,7 +50,7 @@ const PokemonList: React.FC<PokemonListProps> = ({ list }) => {
       )}
     </>
   ) : (
-    <Status message="There are no pokemon matching this criteria" />
+    <Status message="There is no pokemon matching this criteria" />
   );
 };
 

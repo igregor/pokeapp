@@ -1,12 +1,22 @@
+import {
+  Avatar,
+  Divider,
+  ListItemAvatar,
+  ListItemButton,
+  ListItemText,
+} from "@mui/material";
+
 interface PokemonListItemProps {
   name: string;
   thumbnail: string;
+  types: string[];
   onItemClick: (name: string) => void;
 }
 
 const PokemonListItem: React.FC<PokemonListItemProps> = ({
   name,
   thumbnail,
+  types,
   onItemClick,
 }) => {
   const handleItemClick = () => {
@@ -14,10 +24,19 @@ const PokemonListItem: React.FC<PokemonListItemProps> = ({
   };
 
   return (
-    <div data-testid="pokemon-list-item" onClick={handleItemClick}>
-      <p>{name}</p>
-      <img src={thumbnail} alt={name} />
-    </div>
+    <>
+      <ListItemButton data-testid="pokemon-list-item" onClick={handleItemClick}>
+        <ListItemAvatar>
+          <Avatar
+            src={thumbnail}
+            alt={name}
+            sx={{ backgroundColor: "background.paper" }}
+          />
+        </ListItemAvatar>
+        <ListItemText primary={name} secondary={types.join(", ")} />
+      </ListItemButton>
+      <Divider />
+    </>
   );
 };
 

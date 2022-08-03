@@ -1,11 +1,13 @@
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Avatar,
   Button,
+  Chip,
   Dialog,
   DialogActions,
   DialogContent,
   DialogTitle,
+  Stack,
   Typography,
 } from "@mui/material";
 
@@ -19,9 +21,9 @@ interface DetailsDialogProps {
 const DetailsDialog: React.FC<DetailsDialogProps> = ({ name, onClose }) => {
   const [pokemonDetails, setPokemonDetails] = useState<Pokemon>();
 
-  const handleClose = useCallback(() => {
+  const handleClose = () => {
     onClose();
-  }, [onClose]);
+  };
 
   /* 
     NOTE @g.wojtanowicz This is to "express possible solution".
@@ -42,17 +44,27 @@ const DetailsDialog: React.FC<DetailsDialogProps> = ({ name, onClose }) => {
       {pokemonDetails && (
         <Dialog onClose={onClose} open={true} data-testid="details-dialog">
           <DialogTitle>{pokemonDetails.name.english}</DialogTitle>
+
           <DialogContent>
             <Avatar
               alt={pokemonDetails.name.english}
-              src={pokemonDetails.image.sprite}
-              sx={{ width: 56, height: 56 }}
+              src={pokemonDetails.image.thumbnail}
+              sx={{ width: 100, height: 100 }}
             />
+
+            <Stack sx={{ py: 2 }} direction="row" gap={1}>
+              {pokemonDetails.type.map((type) => (
+                <Chip label={type} />
+              ))}
+            </Stack>
+
             <Typography>{pokemonDetails.description}</Typography>
           </DialogContent>
 
           <DialogActions>
-            <Button onClick={handleClose}>Close</Button>
+            <Button onClick={handleClose} variant="contained">
+              Close
+            </Button>
           </DialogActions>
         </Dialog>
       )}
