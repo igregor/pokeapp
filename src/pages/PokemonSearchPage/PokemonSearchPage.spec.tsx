@@ -3,10 +3,10 @@ import { renderPokemonSearchPage } from "./PokemonSearchPage.test-utils";
 jest.mock("../../services/pokedex/data/pokemon.json");
 
 describe("SinglePokemonPage", () => {
-  it("renders introduction message and searchBar before the user types anything", () => {
+  it("renders introduction message and searchBar before the user types anything", async () => {
     const utils = renderPokemonSearchPage();
 
-    utils.assert.introductionMessage.isRendered();
+    await utils.assert.introductionMessage.isRendered();
     utils.assert.searchBar.isRendered();
   });
 
@@ -16,8 +16,8 @@ describe("SinglePokemonPage", () => {
 
       await utils.act.searchBar.typeInNameInput("saur");
 
-      utils.assert.introductionMessage.isNotRendered();
-      utils.assert.pokemonList.hasItems(["Bulbasaur", "Ivysaur"]);
+      await utils.assert.introductionMessage.isNotRendered();
+      await utils.assert.pokemonList.hasItems(["Bulbasaur", "Ivysaur"]);
     });
 
     it("allows to filter the results by type", async () => {
@@ -25,9 +25,11 @@ describe("SinglePokemonPage", () => {
 
       await utils.act.searchBar.typeInNameInput("saur");
 
+      await utils.assert.pokemonList.hasItems(["Bulbasaur", "Ivysaur"]);
+
       await utils.act.searchBar.selectType("Poison");
 
-      utils.assert.pokemonList.hasItems(["Ivysaur"]);
+      await utils.assert.pokemonList.hasItems(["Ivysaur"]);
     });
 
     it("allows to clear the search results", async () => {
@@ -35,11 +37,11 @@ describe("SinglePokemonPage", () => {
 
       await utils.act.searchBar.typeInNameInput("saur");
 
-      utils.assert.pokemonList.hasItems(["Bulbasaur", "Ivysaur"]);
+      await utils.assert.pokemonList.hasItems(["Bulbasaur", "Ivysaur"]);
 
       await utils.act.searchBar.typeInNameInput("");
 
-      utils.assert.introductionMessage.isRendered();
+      await utils.assert.introductionMessage.isRendered();
       utils.assert.pokemonList.isNotRendered();
     });
   });
@@ -54,6 +56,8 @@ describe("SinglePokemonPage", () => {
 
     await utils.act.searchBar.typeInNameInput("saur");
 
+    await utils.assert.pokemonList.hasItems(["Bulbasaur", "Ivysaur"]);
+
     await utils.act.pokemonList.clickListItem("Bulbasaur");
 
     utils.assert.detailsDialog.isRenderedForSpecificPokemon("Bulbasaur");
@@ -62,6 +66,6 @@ describe("SinglePokemonPage", () => {
 
     utils.assert.detailsDialog.isNotRendered();
 
-    utils.assert.pokemonList.hasItems(["Bulbasaur", "Ivysaur"]);
+    await utils.assert.pokemonList.hasItems(["Bulbasaur", "Ivysaur"]);
   });
 });

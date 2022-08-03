@@ -1,5 +1,11 @@
 import PokemonSearchPage from "./PokemonSearchPage";
-import { render, screen, fireEvent, within } from "./../../test-utils/render";
+import {
+  render,
+  screen,
+  fireEvent,
+  within,
+  waitFor,
+} from "./../../test-utils/render";
 
 export function renderPokemonSearchPage() {
   const { user } = render(<PokemonSearchPage />);
@@ -51,12 +57,18 @@ export function renderPokemonSearchPage() {
 
     assert: {
       introductionMessage: {
-        isRendered: () => {
-          expect(screen.getByText("Let's find a pokemon")).toBeInTheDocument();
+        isRendered: async () => {
+          await waitFor(() => {
+            expect(
+              screen.getByText("Let's find a pokemon")
+            ).toBeInTheDocument();
+          });
         },
 
-        isNotRendered: () => {
-          expect(screen.queryByText("Let's find a pokemon")).toBeNull();
+        isNotRendered: async () => {
+          await waitFor(() => {
+            expect(screen.queryByText("Let's find a pokemon")).toBeNull();
+          });
         },
       },
 
@@ -73,10 +85,12 @@ export function renderPokemonSearchPage() {
           expect(screen.queryByTestId("pokemon-list")).toBeNull();
         },
 
-        hasItems: (pokemonNames: string[]) => {
-          expect(screen.getAllByTestId("pokemon-list-item")).toHaveLength(
-            pokemonNames.length
-          );
+        hasItems: async (pokemonNames: string[]) => {
+          await waitFor(() => {
+            expect(screen.getAllByTestId("pokemon-list-item")).toHaveLength(
+              pokemonNames.length
+            );
+          });
 
           pokemonNames.forEach((name) => {
             expect(screen.getByText(name)).toBeInTheDocument();

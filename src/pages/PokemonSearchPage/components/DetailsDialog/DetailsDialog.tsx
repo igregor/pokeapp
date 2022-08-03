@@ -54,7 +54,7 @@ const DetailsDialog: React.FC<DetailsDialogProps> = ({ name, onClose }) => {
 
             <Stack sx={{ py: 2 }} direction="row" gap={1}>
               {pokemonDetails.type.map((type) => (
-                <Chip label={type} />
+                <Chip key={type} label={type} />
               ))}
             </Stack>
 

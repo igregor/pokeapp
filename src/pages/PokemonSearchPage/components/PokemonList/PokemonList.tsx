@@ -33,11 +33,11 @@ const PokemonList: React.FC<PokemonListProps> = ({ list }) => {
       <List data-testid="pokemon-list">
         {list.map((pokemon) => (
           <PokemonListItem
-            onItemClick={handleItemClick}
             key={pokemon.id}
             name={pokemon.name.english}
             types={pokemon.type}
             thumbnail={pokemon.image.thumbnail}
+            onItemClick={handleItemClick}
           />
         ))}
       </List>

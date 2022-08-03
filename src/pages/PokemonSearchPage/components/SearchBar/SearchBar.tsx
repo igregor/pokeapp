@@ -1,4 +1,5 @@
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useRef, useState } from "react";
+import { debounce } from "lodash";
 import {
   FormControl,
   InputLabel,
@@ -33,11 +34,23 @@ const SearchBar: React.FC<SearchBarProps> = ({
     setType(value);
   };
 
+  const debouncedNameQueryChange = useRef(
+    debounce(async (query: string) => {
+      onNameQueryChange(query);
+    }, 500)
+  ).current;
+
   const handleNameQueryChange = (
     event: ChangeEvent<HTMLInputElement>
   ): void => {
-    onNameQueryChange(event.target.value);
+    debouncedNameQueryChange(event.target.value);
   };
+
+  useEffect(() => {
+    return () => {
+      debouncedNameQueryChange.cancel();
+    };
+  }, [debouncedNameQueryChange]);
 
   return (
     <Stack direction={{ xs: "column", md: "row" }} spacing={2}>
@@ -53,6 +66,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
         <Select
           labelId="type-select-label"
           id="type-select"
+          data-testid="type-select"
           value={type}
           label="Name"
           onChange={handleTypeChange}
