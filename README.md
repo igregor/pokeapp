@@ -17,6 +17,11 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 - error handling
 - real API
 
+## TODO:
+
+- add debounce!!!!!! and check how many times the clien is called in the test
+- check rerenders
+
 ## Available Scripts
 
 In the project directory, you can run:
