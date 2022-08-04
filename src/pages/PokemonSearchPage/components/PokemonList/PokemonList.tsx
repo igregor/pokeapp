@@ -1,11 +1,10 @@
-import { useState } from "react";
-import { List } from "@mui/material";
+import { useCallback, useState } from "react";
 
-import PokemonListItem from "./PokemonListItem";
 import Status from "../Status";
 import DetailsDialog from "../DetailsDialog";
 
 import { Pokemon } from "../../../../services/pokedex";
+import PokemonListContent from "./PokemonListContent";
 
 interface PokemonListProps {
   list: Pokemon[];
@@ -16,31 +15,17 @@ const PokemonList: React.FC<PokemonListProps> = ({ list }) => {
     null
   );
 
-  const openDetailsDialog = (pokemonsName: string) => {
+  const openDetailsDialog = useCallback((pokemonsName: string) => {
     setSelectedPokemonName(pokemonsName);
-  };
+  }, []);
 
   const closeDetailsDialog = () => {
     setSelectedPokemonName(null);
   };
 
-  const handleItemClick = (name: string) => {
-    openDetailsDialog(name);
-  };
-
   return list.length ? (
     <>
-      <List data-testid="pokemon-list">
-        {list.map((pokemon) => (
-          <PokemonListItem
-            key={pokemon.id}
-            name={pokemon.name.english}
-            types={pokemon.type}
-            thumbnail={pokemon.image.thumbnail}
-            onItemClick={handleItemClick}
-          />
-        ))}
-      </List>
+      <PokemonListContent list={list} openDetailsDialog={openDetailsDialog} />
 
       {selectedPokemonName && (
         <DetailsDialog
