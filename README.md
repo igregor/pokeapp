@@ -16,11 +16,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 - optimized view for a long list of results - e.g. lazy loading or show more
 - error handling
 - real API
-
-## TODO:
-
-- add debounce!!!!!! and check how many times the clien is called in the test
-- check rerenders
+- filtering by type - currently it gets options from the filtered list, so it reduces select options during filtering. It may lead to only single option available, "Clear select type" should be introduced
 
 ## Available Scripts
 
