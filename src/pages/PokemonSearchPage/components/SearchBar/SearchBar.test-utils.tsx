@@ -57,6 +57,13 @@ export function renderSearchBar(availableTypes: string[] = []) {
 
           expect(selectButton).toHaveAttribute("aria-disabled");
         },
+
+        hasDefaultValue: async () => {
+          await waitFor(() => {
+            const element = screen.getByText("Select type");
+            expect(element).toBeVisible();
+          });
+        },
       },
 
       onNameQueryChange: {

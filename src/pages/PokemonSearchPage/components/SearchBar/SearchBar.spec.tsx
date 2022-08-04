@@ -14,6 +14,18 @@ describe("typeSelect", () => {
 
     await utils.assert.onTypeSelect.wasCalledWith("Grass");
   });
+
+  it("sets the default value when nameQuery changed", async () => {
+    const utils = renderSearchBar(["Grass", "Poison"]);
+
+    await utils.act.typeInNameInput("cookie");
+
+    await utils.act.selectType("Grass");
+
+    await utils.act.typeInNameInput("sweet");
+
+    await utils.assert.typeSelect.hasDefaultValue();
+  });
 });
 
 describe("nameInput", () => {

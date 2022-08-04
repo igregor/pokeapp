@@ -37,6 +37,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
   const debouncedNameQueryChange = useRef(
     debounce(async (query: string) => {
       onNameQueryChange(query);
+      setType(defaultTypeValue);
     }, 500)
   ).current;
 
